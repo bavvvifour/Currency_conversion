@@ -1,0 +1,17 @@
+CREATE TABLE sqlite_sequence(name,seq);
+
+CREATE TABLE Currencies(
+    ID INTEGER NOT NULL primary key AUTOINCREMENT,
+    Code varchar(30) Not null Unique,
+    FullName varchar(50) Not Null,
+    Sign varchar(30) Not Null Unique
+);
+
+CREATE TABLE ExchangeRates(
+        ID INTEGER PRIMARY KEY AUTOINCREMENT,
+        Rate DECIMAL(6,0),
+        BaseCurrencyId INTEGER,
+        TargetCurrencyId INTEGER,
+        CONSTRAINT ExchangeRate_FK FOREIGN KEY (BaseCurrencyId) REFERENCES Currencie(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+        CONSTRAINT ExchangeRate_FK_1 FOREIGN KEY (TargetCurrencyId) REFERENCES Currencie(ID) ON DELETE CASCADE ON UPDATE CASCADE
+);
