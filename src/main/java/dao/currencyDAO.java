@@ -8,14 +8,14 @@ public class currencyDAO {
     public static Connection getConnection() {
         try {
             Class.forName("org.sqlite.JDBC");
-            return DriverManager.getConnection("jdbc:sqlite:src/main/resources/CurrenciesDB.db");
+            return DriverManager.getConnection("jdbc:sqlite:src/main/resources/init.db");
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
     public static currenciesModel getCurrency(String name) {
-        name = name.toUpperCase();
+        name = name.toLowerCase();
         currenciesModel currencies = new currenciesModel();
         try (Connection con = getConnection()) {
             String sql = "SELECT * FROM Currencies WHERE Code = ?";

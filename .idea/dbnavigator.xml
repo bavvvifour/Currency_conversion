@@ -12,22 +12,22 @@
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="ac73b4da-9212-49b9-a434-18e29c3666e7">
-      <console name="CurrenciesDB" type="STANDARD" schema="CurrenciesDB" session="Main"><![CDATA[select * from "Currencies"]]></console>
+    <connection id="458b5235-4a05-44d5-8fc8-b26c08b7d9a9">
+      <console name="init" type="STANDARD" schema="main" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="ac73b4da-9212-49b9-a434-18e29c3666e7" object-ref="schemas/CurrenciesDB/tables/Currencies" />
-      <object connection-id="ac73b4da-9212-49b9-a434-18e29c3666e7" object-ref="consoles/CurrenciesDB" />
-    </open-files>
+    <open-files />
+  </component>
+  <component name="DBNavigator.Project.DatabaseSessionManager">
+    <connection id="458b5235-4a05-44d5-8fc8-b26c08b7d9a9" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="ac73b4da-9212-49b9-a434-18e29c3666e7" dataset="CurrenciesDB.sqlite_sequence" active-filter-id="EMPTY_FILTER" />
-    <filter-actions connection-id="ac73b4da-9212-49b9-a434-18e29c3666e7" dataset="CurrenciesDB.Currencies" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="458b5235-4a05-44d5-8fc8-b26c08b7d9a9" dataset="main.ExchangeRates" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="458b5235-4a05-44d5-8fc8-b26c08b7d9a9" dataset="main.Currencies" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
@@ -44,11 +44,16 @@
     <last-used-operator value="EQUAL" />
     <filters />
   </component>
+  <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
+    <recently-used-interfaces>
+      <mapping database-type="SQLITE" interface-id="2e6abeeb-2b24-404e-ac3e-18432322ac8f" />
+    </recently-used-interfaces>
+  </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="ac73b4da-9212-49b9-a434-18e29c3666e7" active="true" signed="true">
+      <connection id="458b5235-4a05-44d5-8fc8-b26c08b7d9a9" active="true" signed="true">
         <database>
-          <name value="CurrenciesDB" />
+          <name value="init" />
           <description value="" />
           <database-type value="SQLITE" />
           <config-type value="BASIC" />
@@ -63,7 +68,7 @@
           <tns-folder value="" />
           <tns-profile value="" />
           <files>
-            <file path="C:\Programming\Java\seven_projects\Currency_conversion\src\main\resources\CurrenciesDB.db" schema="CurrenciesDB" />
+            <file path="C:\Programming\Java\seven_projects\Currency_conversion\src\main\resources\init.db" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />
@@ -461,7 +466,9 @@
         <prompt-execution value="false" />
       </statement-execution>
       <script-execution>
-        <command-line-interfaces />
+        <command-line-interfaces>
+          <value id="2e6abeeb-2b24-404e-ac3e-18432322ac8f" name="SQLite terminal" executable-path="$PROJECT_DIR$/../../../../SQLite/sqlite3.exe" database-type="SQLITE" />
+        </command-line-interfaces>
         <execution-timeout value="300" />
       </script-execution>
       <method-execution>

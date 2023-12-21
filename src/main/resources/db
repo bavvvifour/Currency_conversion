@@ -12,6 +12,6 @@ CREATE TABLE ExchangeRates(
         Rate DECIMAL(6,0),
         BaseCurrencyId INTEGER,
         TargetCurrencyId INTEGER,
-        CONSTRAINT ExchangeRate_FK FOREIGN KEY (BaseCurrencyId) REFERENCES Currencie(ID) ON DELETE CASCADE ON UPDATE CASCADE,
-        CONSTRAINT ExchangeRate_FK_1 FOREIGN KEY (TargetCurrencyId) REFERENCES Currencie(ID) ON DELETE CASCADE ON UPDATE CASCADE
+        CONSTRAINT ExchangeRate_FK FOREIGN KEY (BaseCurrencyId) REFERENCES Currencies(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+        CONSTRAINT ExchangeRate_FK_1 FOREIGN KEY (TargetCurrencyId) REFERENCES Currencies(ID) ON DELETE CASCADE ON UPDATE CASCADE
 );

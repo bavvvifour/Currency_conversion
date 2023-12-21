@@ -22,7 +22,6 @@ public class currenciesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<currenciesModel> currencies = currenciesDAO.getAllCurrencies();
-
         Gson gson = new Gson();
         String json = gson.toJson(currencies);
         resp.setContentType("application/json");
