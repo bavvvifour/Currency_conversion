@@ -17,22 +17,6 @@ public class exchangeRatesDAO {
             return null;
         }
     }
-    public static void addExchangeRate(double Rate, int BaseCurrencyid, int TargetCurrencyid) {
-        Connection con = getConnection();
-        try (con) {
-            String sql = "INSERT INTO ExchangeRates (Rate, BaseCurrencyid, TargetCurrencyid) " +
-                    "VALUES (?, ?, ?)";
-            assert con != null;
-            try (PreparedStatement ps = con.prepareStatement(sql)) {
-                ps.setDouble(1, Rate);
-                ps.setInt(2, BaseCurrencyid);
-                ps.setInt(3, TargetCurrencyid);
-                ps.executeUpdate();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
     public static List<exchangeRatesModel> getAllExchangeRates() {
         List<exchangeRatesModel> exchangeRates = new ArrayList<>();
         Connection con = getConnection();
@@ -74,4 +58,75 @@ public class exchangeRatesDAO {
         }
         return exchangeRates;
     }
+    public static void addExchangeRate(String baseCurrencyCode, String targetCurrencyCode, double rate) {
+        try (Connection con = getConnection()) {
+            String sqlBaseCur = "SELECT ID FROM Currencies WHERE Code = ?";
+            assert con != null;
+            try (PreparedStatement baseCurrencyIdStmt = con.prepareStatement(sqlBaseCur)) {
+                baseCurrencyIdStmt.setString(1, baseCurrencyCode);
+                try (ResultSet baseCurrencyIdRs = baseCurrencyIdStmt.executeQuery()) {
+                    if (baseCurrencyIdRs.next()) {
+                        int baseCurrencyId = baseCurrencyIdRs.getInt("ID");
+
+                        String sqlTargetCur = "SELECT ID FROM Currencies WHERE Code = ?";
+                        try (PreparedStatement targetCurrencyIdStmt = con.prepareStatement(sqlTargetCur)) {
+                            targetCurrencyIdStmt.setString(1, targetCurrencyCode);
+                            try (ResultSet targetCurrencyIdRs = targetCurrencyIdStmt.executeQuery()) {
+                                if (targetCurrencyIdRs.next()) {
+                                    int targetCurrencyId = targetCurrencyIdRs.getInt("ID");
+
+                                    String sql = "INSERT INTO ExchangeRates(Rate, BaseCurrencyId, TargetCurrencyId) VALUES(?, ?, ?)";
+                                    try (PreparedStatement ps = con.prepareStatement(sql)) {
+                                        ps.setDouble(1, rate);
+                                        ps.setInt(2, baseCurrencyId);
+                                        ps.setInt(3, targetCurrencyId);
+                                        ps.executeUpdate();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+//
+//    public void readExchangeRate(int exchangeRateId) {
+//        String sql = "SELECT * FROM ExchangeRates WHERE ID = ?";
+//        try (Connection conn = this.connect();
+//             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//            pstmt.setInt(1, exchangeRateId);
+//            ResultSet rs = pstmt.executeQuery();
+//            while (rs.next()) {
+//                System.out.println("ID: " + rs.getInt("ID") + ", Rate: " + rs.getDouble("Rate") + ", BaseCurrencyId: " + rs.getInt("BaseCurrencyId") + ", TargetCurrencyId: " + rs.getInt("TargetCurrencyId"));
+//            }
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
+//
+//    public void updateExchangeRate(int exchangeRateId, double newRate) {
+//        String sql = "UPDATE ExchangeRates SET Rate = ? WHERE ID = ?";
+//        try (Connection conn = this.connect();
+//             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//            pstmt.setDouble(1, newRate);
+//            pstmt.setInt(2, exchangeRateId);
+//            pstmt.executeUpdate();
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
+//
+//    public void deleteExchangeRate(int exchangeRateId) {
+//        String sql = "DELETE FROM ExchangeRates WHERE ID = ?";
+//        try (Connection conn = this.connect();
+//             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//            pstmt.setInt(1, exchangeRateId);
+//            pstmt.executeUpdate();
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 }

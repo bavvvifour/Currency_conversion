@@ -6,6 +6,25 @@ public class exchangeRatesModel {
     private currenciesModel BaseCurrencyid;
     private currenciesModel TargetCurrencyid;
 
+    private double amount;
+    private double convertedAmount;
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public double getConvertedAmount() {
+        return convertedAmount;
+    }
+
+    public void setConvertedAmount(double convertedAmount) {
+        this.convertedAmount = convertedAmount;
+    }
+
     public int getID() {
         return ID;
     }

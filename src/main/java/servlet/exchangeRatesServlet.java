@@ -30,6 +30,20 @@ public class exchangeRatesServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("post");
+        double rate = Double.parseDouble(req.getParameter("rate"));
+        String baseCurrencyCode = req.getParameter("baseCurrencyCode");
+        String targetCurrencyCode = req.getParameter("targetCurrencyCode");
+
+        exchangeRatesDAO.addExchangeRate(baseCurrencyCode, targetCurrencyCode, rate);
+
+        List<exchangeRatesModel> updatedExchangeRates = exchangeRatesDAO.getAllExchangeRates();
+
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        Gson gson = new Gson();
+        String json = gson.toJson(updatedExchangeRates);
+        PrintWriter out = resp.getWriter();
+        out.print(json);
+        out.flush();
     }
 }
